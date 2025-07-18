@@ -1,18 +1,25 @@
+// Script for form submission
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll(".fade-in");
-    const options = { threshold: 0.1 };
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add("show");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, options);
+    // Collect form values (optional)
+    const name = form.querySelector("input[type='text']").value;
+    const email = form.querySelector("input[type='email']").value;
+    const message = form.querySelector("textarea").value;
 
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+    // Basic form validation
+    if (!name || !email || !message) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    // Simulate message send
+    alert("Thank you " + name + "! Your message has been sent. We'll contact you soon.");
+    
+    // Reset form
+    form.reset();
+  });
 });
